@@ -15,6 +15,7 @@ object Command {
   val RM = "rm"
   val ECHO = "echo"
   val CAT = "cat"
+  val EXIT = "exit"
 
   def emptyCommand: Command = new Command {
     override def apply(state: State): State = state
@@ -57,6 +58,9 @@ object Command {
     else if (CAT.equals(tokens(0))) {
       if (tokens.length < 2) incompleteCommand(CAT)
       else new Cat(tokens(1))
+    }
+    else if (EXIT.equals(tokens(0))) {
+      new Exit
     }
     else new UnknownCommand
   }
