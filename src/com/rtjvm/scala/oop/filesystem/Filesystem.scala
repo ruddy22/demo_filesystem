@@ -7,6 +7,19 @@ import com.rtjvm.scala.oop.files.Directory
 
 object Filesystem extends App {
   val root = Directory.ROOT
+  /**
+   * TODO : improvement
+   * more functional way - use infinite sequences (i.e. streams)
+   * ```
+   * io.Source.stdin.getLines().foldLeft(State(root, root))((curState, newLine) => {
+   *   curState.show
+   *   Command.from(newLine).apply(curState)
+   *   if ("exit".equals(newLine)) {
+   *     System.exit(status = 0)
+   *   }
+   * })
+   * ```
+   */
   val scanner = new Scanner(System.in)
 
   var state = State(root, root)

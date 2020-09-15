@@ -2,6 +2,13 @@ package com.rtjvm.scala.oop.commands
 
 import com.rtjvm.scala.oop.filesystem.State
 
+/**
+ * TODO : improvement
+ * Trait Command is a transformer State => State
+ * ```
+ * trait Command extends (State => State)  // functional interface already include an apply method
+ * ```
+ */
 trait Command {
   def apply(state: State): State
 }
@@ -27,6 +34,19 @@ object Command {
 
   def from(input: String): Command = {
     val tokens: Array[String] = input.split(' ')
+
+    /**
+     * TODO: improvement
+     * ```
+     * if (input.isEmpty || tokens.isEmpty) emptyCommand
+     * else tokens(0) match {
+     *   case MKDIR if tokens.length < 2 => incompleteCommand MKDIR
+     *   case MKDIR => new Mkdir(tokens(1))
+     *   case LS => new Ls
+     *   ...
+     * }
+     * ```
+     */
 
     if (input.isEmpty || tokens.isEmpty) emptyCommand
     else if (MKDIR.equals(tokens(0))) {
